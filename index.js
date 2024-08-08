@@ -1,14 +1,38 @@
 import express from "express";
 import bodyParser from "body-parser";
+import pg from "pg"
 
 const app = express();
 const port = 3000;
+
+// Code for Accessing the World PostreSQL Database
+//Configuration Code
+const db = new pg.Client({
+  user: "postgres",
+  host: "localhost",
+  database: "world",
+  password: "201338192Mb@s@",
+  port: 5432
+});
+
+// Use the line below to connect to the DB
+db.connect();
 
 let quiz = [
   { country: "France", capital: "Paris" },
   { country: "United Kingdom", capital: "London" },
   { country: "United States of America", capital: "New York" },
 ];
+// Query the capitals table
+db.query("SELECT * FROM capitals", (error, res) =>{
+  if(error){
+    console.log("There was an Error querying the Table", error.stack)
+  }else{
+    quiz = res.rows;
+  }
+
+  db.end();
+});
 
 let totalCorrect = 0;
 
