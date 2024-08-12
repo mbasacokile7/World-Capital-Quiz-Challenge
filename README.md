@@ -1,4 +1,4 @@
-# World Capital quiz Challenge
+# World Capital Quiz Challenge
 ------------------------------------------
 
 ## The Aim
